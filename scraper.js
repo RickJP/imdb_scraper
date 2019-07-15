@@ -10,38 +10,38 @@ var request = require('request');
 const movieSearchUrl = 'http://localhost:3000/movie/';
 const imdbIDs = ['tt0111161', 'tt0068646', 'tt0137523', 'tt1375666'];
 
-function getMovieInfo(id, cb) {
-  request(`${movieSearchUrl}${id}`, function(err, req) {
-    movieInfo = req.body;
-    console.log(movieInfo);
-    return cb(movieInfo);
-  });
-}
+// function getMovieInfo(id, cb) {
+//   request(`${movieSearchUrl}${id}`, function(err, req) {
+//     movieInfo = req.body;
+//     console.log(movieInfo);
+//     return cb(movieInfo);
+//   });
+// }
 
-let count = 0;
-let moviesInfo = [];
+// let count = 0;
+// let moviesInfo = [];
 
-imdbIDs.forEach( (id, idx) => {
-  getMovieInfo(id, data => {
+// imdbIDs.forEach( (id, idx) => {
+//   getMovieInfo(id, data => {
     
-    count++;
-    if (imdbIDs.length === count) {
-      data = data.replace(/\,$/,''); 
-      console.log(data.slice(-1));
-      newData = '[' + data + ']';
-      moviesInfo.push(newData);
+//     count++;
+//     if (imdbIDs.length === count) {
+//       data = data.replace(/\,$/,''); 
+//       console.log(data.slice(-1));
+//       newData = '[' + data + ']';
+//       moviesInfo.push(newData);
 
-      fs.writeFile('movieInfo.json', moviesInfo, 'utf8', () => {
-        console.log('Finished Writing');
-      });
-    } else {
-      moviesInfo.push(data);
-    }  
-    // let existingData = fs.readFileSync('movieInfo.json');
-    // let existing = JSON.parse(existingData);
-    // existing.append(data);  
-  });
-});
+//       fs.writeFile('movieInfo.json', moviesInfo, 'utf8', () => {
+//         console.log('Finished Writing');
+//       });
+//     } else {
+//       moviesInfo.push(data);
+//     }  
+//     // let existingData = fs.readFileSync('movieInfo.json');
+//     // let existing = JSON.parse(existingData);
+//     // existing.append(data);  
+//   });
+// });
 
 
 function searchMovies(searchTerm) {

@@ -1,6 +1,16 @@
 const express = require('express');
-const app = express();
+
 const scraper = require('./scraper');
+const app = express();
+
+// const corsOptions = {
+//   origin: "*", // Or pass origins you want
+//   credentials: true
+// };
+const cors = require('cors');
+app.use(cors());
+
+
 const db = require('./db');
 
 app.get('/', (req, res) => {

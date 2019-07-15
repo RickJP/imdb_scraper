@@ -6,16 +6,14 @@ const searchUrl = 'https://www.imdb.com/find?s=tt&ttype=ft&ref_=fn_ft&q=';
 const movieUrl = 'https://www.imdb.com/title/';
 const movieCache = {};
 const searchCache = {};
-
 var request = require('request');
 const movieSearchUrl = 'http://localhost:3000/movie/';
-
 const imdbIDs = ['tt0111161', 'tt0068646', 'tt0137523', 'tt1375666'];
 
 function getMovieInfo(id, cb) {
-  //console.log(`${movieSearchUrl}${id}`);
-  request(`${movieSearchUrl}${id}`, function(err, req, body) {
+  request(`${movieSearchUrl}${id}`, function(err, req) {
     movieInfo = req.body;
+    console.log(movieInfo);
     return cb(movieInfo);
   });
 }
@@ -31,7 +29,7 @@ imdbIDs.forEach( (id, idx) => {
       data = data.replace(/\,$/,''); 
       console.log(data.slice(-1));
       newData = '[' + data + ']';
-      moviesInfo.push(newDat);
+      moviesInfo.push(newData);
 
       fs.writeFile('movieInfo.json', moviesInfo, 'utf8', () => {
         console.log('Finished Writing');
@@ -44,9 +42,6 @@ imdbIDs.forEach( (id, idx) => {
     // existing.append(data);  
   });
 });
-
-
-
 
 
 function searchMovies(searchTerm) {
